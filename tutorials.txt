@@ -1,0 +1,21 @@
+
+Reproduce plot with curves for G1 and G2 model - use python interpolation
+
+To get waydroid working (somehow):
+	Follow https://github.com/casualsnek/waydroid_script
+	Install Libhoudini
+	Run waydroid and wait for crash
+	Install nodataperm hack
+	Run waydroid and wait for a minute, it should be stuck loading
+	Run sudo venv/bin/python3 main.py uninstall nodataperm
+	This removes it and then it works now
+	If crashes persist try Libdnk instead of Libhoudini (or both?)
+	
+	
+	
+Helium comes from a copr repo, you can use "helium" command to break it if it locks
+
+For when git asks me a question
+git config --global credential.helper store 
+
+
