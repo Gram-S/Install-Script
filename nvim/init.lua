@@ -42,6 +42,18 @@ require("lazy").setup({
   opts = {},
 },
 
+{
+  "brenton-leighton/multiple-cursors.nvim",
+  version = "*",  -- Use the latest tagged version
+  opts = {},  -- This causes the plugin setup function to be called
+  keys = {
+    {"<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = {"n", "x"}, desc = "Add cursor and move down"},
+    {"<C-k>", "<Cmd>MultipleCursorsAddUp<CR>", mode = {"n", "x"}, desc = "Add cursor and move up"},
+
+    {"<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = {"n", "i", "x"}, desc = "Add cursor and move up"},
+    {"<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = {"n", "i", "x"}, desc = "Add cursor and move down"},
+  },
+},
 
     },
   },
@@ -71,8 +83,8 @@ vim.g.netrw_list_hide = '\\(^\\|\\s\\s\\)\\zs\\.\\S\\+'
 vim.g.netrw_hide = 1
 
 -- Change Shift + Right to end of word
-vim.keymap.set('i', '<S-Right>', '<C-o>e<Right>', {})
-vim.keymap.set('n', '<S-Right>', 'e', {})
+vim.keymap.set('i', '<S-Right>', '<C-o>e<Right>', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-Right>', 'el', { noremap = true, silent = true })
 
 -- R to redo 
 vim.keymap.set('n', 'r', '<C-r>', {})
@@ -88,6 +100,11 @@ vim.keymap.set('i', '<S-Down>', '<C-o>9j<Down>', {})
 
 -- Netwr directory exit at file
 vim.g.netrw_keepdir = 0
+
+-- Let d clear a line
+vim.keymap.set('n', 'd', function()
+  vim.api.nvim_set_current_line('')
+end, { noremap = true, silent = true })
 
 -- Use E to open netwr
 vim.api.nvim_create_user_command('E', function()
