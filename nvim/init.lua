@@ -1,7 +1,22 @@
 -- INIT.LUA for neo vim installed via dnf tree (cli), requires the colors directory
 
+-- Turn off the little things at the end of command line
+vim.opt.ruler = false
+
+-- Slightly darker command line
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    local bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg or 0x1e1c1a
+    local r = math.max(0, bit.rshift(bit.band(bg, 0xff0000), 16) - 10)
+    local g = math.max(0, bit.rshift(bit.band(bg, 0x00ff00), 8) - 10)
+    local b = math.max(0, bit.band(bg, 0x0000ff) - 40)
+    vim.api.nvim_set_hl(0, 'MsgArea', { bg = r * 65536 + g * 256 + b })
+  end,
+})
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -29,19 +44,103 @@ require("lazy").setup({
     -- import your plugins
     { 
 
--- Super epic Markdown Render, run with :LivePreview start
+
+-- Markdown renderer
 {
   "brianhuster/live-preview.nvim",
-  opts = {},
+  dependencies = { "nvim-telescope/telescope.nvim" }, -- optional
+  ft = { "markdown" },
+  config = function()
+    require("livepreview").setup({
+      commands = {
+        start = "LivePreview",
+        stop = "StopPreview",
+      },
+      port = 5500,
+    })
+  end,
 },
 
 -- Cute files to netrw
 {
-  "prichrd/netrw.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {},
+  'echasnovski/mini.statusline',
+  version = '*',
+  config = function()
+    local statusline = require('mini.statusline')
+
+    local function set_highlights()
+      local function lighten(hex, amount)
+        local r = math.min(255, tonumber(hex:sub(2,3), 16) + amount)
+        local g = math.min(255, tonumber(hex:sub(4,5), 16) + amount)
+        local b = math.min(255, tonumber(hex:sub(6,7), 16) + amount)
+        return string.format('#%02x%02x%02x', r, g, b)
+      end
+
+      local normal_bg = string.format('#%06x', vim.api.nvim_get_hl(0, { name = 'Normal' }).bg or 0x1e1c1a)
+      local normal_fg = string.format('#%06x', vim.api.nvim_get_hl(0, { name = 'Normal' }).fg or 0xc5b9a8)
+      local mid_bg    = lighten(normal_bg, 25)
+
+      vim.api.nvim_set_hl(0, 'BarMode',    { fg = normal_fg, bg = lighten(normal_bg, 40) })
+      vim.api.nvim_set_hl(0, 'BarDir',     { fg = normal_fg, bg = mid_bg })
+      vim.api.nvim_set_hl(0, 'BarFile',    { fg = normal_fg, bg = lighten(normal_bg, 10) })
+      vim.api.nvim_set_hl(0, 'BarType',    { fg = normal_fg, bg = mid_bg })
+      vim.api.nvim_set_hl(0, 'BarSaved',   { fg = '#a6e3a1', bg = mid_bg })
+      vim.api.nvim_set_hl(0, 'BarUnsaved', { fg = '#fab387', bg = mid_bg })
+      vim.api.nvim_set_hl(0, 'BarExtra',   { fg = normal_fg, bg = lighten(normal_bg, 40) })
+    end
+
+    set_highlights()
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      callback = set_highlights,
+    })
+
+    statusline.setup({
+      content = {
+        active = function()
+          local mode_map = {
+            n      = 'NORMAL',
+            i      = 'INSERT',
+            v      = 'VISUAL',
+            V      = 'V-LINE',
+            [''] = 'V-BLOCK',
+            s      = 'SELECT',
+            r      = 'REPLACE',
+            c      = 'COMMAND',
+          }
+          local mode       = mode_map[vim.fn.mode()] or vim.fn.mode()
+          local filename   = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t')
+          local dir        = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+          local filetype   = vim.bo.filetype ~= '' and vim.bo.filetype or 'plain'
+          local modified   = vim.bo.modified and '● unsaved' or '✔ saved'
+          local mod_hl     = vim.bo.modified and 'BarUnsaved' or 'BarSaved'
+          local ftime      = vim.fn.getftime(vim.api.nvim_buf_get_name(0))
+          local file_age   = ftime > 0 and os.date('%b %d %I:%M %p', ftime) or 'new file'
+
+          return statusline.combine_groups({
+            { hl = 'BarMode',  strings = { mode } },
+            { hl = 'BarDir',   strings = { dir } },
+            { hl = 'BarFile',  strings = { filename } },
+            '%=',
+            { hl = 'BarType',  strings = { filetype } },
+            { hl = mod_hl,     strings = { modified } },
+            { hl = 'BarExtra', strings = { file_age } },
+          })
+        end,
+        inactive = function()
+          return '%t'
+        end,
+      },
+      use_icons = false,
+      set_vim_settings = false,
+    })
+
+    vim.opt.laststatus = 0
+    vim.opt.statusline = ''
+    vim.opt.winbar = '%!v:lua.MiniStatusline.active()'
+  end,
 },
 
+-- Multiple cursors
 {
   "brenton-leighton/multiple-cursors.nvim",
   version = "*",  -- Use the latest tagged version
@@ -69,6 +168,9 @@ vim.opt.number = true          -- absolute line numbers
 
 -- Enable true colors in terminal
 vim.opt.termguicolors = true
+
+vim.opt.wrap = true
+vim.opt.linebreak = true
 
 -- Set Birds of Paradise as the colorscheme
 vim.cmd("colorscheme birds-of-paradise")
