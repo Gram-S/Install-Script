@@ -44,6 +44,65 @@ require("lazy").setup({
     -- import your plugins
     { 
 
+-- Custom Dashboard
+{
+  'goolord/alpha-nvim',
+  config = function()
+    local alpha = require('alpha')
+    local dashboard = require('alpha.themes.dashboard')
+
+    dashboard.section.header.val = {
+      "                                                            ",
+      " ▒▒ ▒█ ▓█▒▒░▓▒▒▒▒▒▒▒▒▒▓▒▒ ▒█▒ ░█░▒██▒  ░░▒░   ▒█  ▓  ▒░░░▓▓ ",
+      " ░  ▒█ ██▓░ ▓▒▒▒▒▒▒▒▒▒▒▒▒ ▒▓▓  ▓ ░████   ▒░  ▓████░░░░░░░▓▒ ",
+      " ▒ █▓▓ ███▒ ▒▒▒▒▒▒▒▒▒▒▒▒▓ ░▒█░ ▒ ░▓███▒  ▒▒░  ▒█▓░ ██ ░░░▒▓ ",
+      " ░ █▒░ ▒▒░  ▒▒▒▒▒▒▒▒▒▒▒▓▓ ░▒█▒░▒ ░▒█████ ▒▒▒   █▒░▒██    ▒▓ ",
+      "   █▒ █████▒ ░▒▒▓▒▒▒▒▒▒▒▒░░ ▒░ ▓   ██████▒▒▓█████████ ▒▒█▓▓ ",
+      " ▓██▒ ▓████▓  ░░▒▒░░░░░▒▒░ ░▒  █  ▓█▓░      ░       ░ ░▒███ ",
+      " ▓██▒▓██████▓   ▒▒░░░░░░▒▒░░░  █░▒█         ░          ░█   ",
+      "   ██████████   ░░░▒▒▒▒▒▒▒▒▒░  ▒█▓░▒▒▒████████████▒███▓▒█▒█ ",
+      "   ████▓▒▒▓███▒ ▒░              ░▒ ▓███▒ ░     ▒▒▓ ███▒░▓▒▓ ",
+      " ▒  ██████▓▓███ ░██  ▓█▒  ▓█████▓██████▓ ░████████ ▓▒▒▒▓░▒▒ ",
+      "  ░ ▓████████████████████████████████████ ▓███▓▓   ▒███▒░▒▓ ",
+      "░█▒░▒    ░▓███████████████████████████████▓ ░░░░▒█████▓▒░▒▓ ",
+      "               ████████████████████████▓▓██████████▓▒█▒▒ ▓▓ ",
+      "  ░████████▓▒   ░█████████▓▓▓██████████████▓███▓▓▓▓███▓▒ ▓▓ ",
+      "████████████████████████████▓████████████████████████▓▓▒ █▓ ",
+      "▒█████▓█▓▓█▓█████████████████████████████████████████▒▓▒ ██ ",
+      " ▒███▓▓▓▓█▓▓▓▓▓▓█████████████████████████████████████▓▓▒ ██ ",
+      " ▒░██████████████████████████████████████████████████▓   ██ ",
+      "    █████████████████████████████████████████████████▓░ ░█▓ ",
+      " ▒▒  ▓█████████████████████████████▒▒███████████████▒█  ▒█▓ ",
+      " ▒▒▒  ░███████████████▓▒▒████████  ▒██████████████░  █  ▒█▓ ",
+      " ▒▒░▒   ████████████████▒   ▓██░ ▒██████████████▒   ▒█  ██▓ ",
+      " ▒▒▒▒▒░  ▓█████████████████████▓██████████████▓   ░▒▓█  ██▓ ",
+      " ▒▒▒▒▒▒▒    ████████████████████████████████░  ▓░ ░▓▓█ ░██▓ ",
+      " ▒▒▒▒▒▒▒▒▒░     ██████████████████████████   ▒▓█░  ▓▓▒ ░███ ",
+      " ▒▒▒▒▒░▒▒▒▒▒▓▒░    ░███████████████████▓   ▒▓▓▓█   ██▒  ██▓ ",
+      " ▒▒▒▒▒░▒▒░░░▒▒▒▓▒▒      ▓▒██████████▓    ▒▓▒▓▓██▒  ██░ ░█▓▓ ",
+      "      __   __ _                   _                    ",
+      "      \\ \\ / /(_) _ __  _  _  ___ | | ___ _  _  ___ ___ ",
+      "       \\ V / | || '  \\| || |/ -_)| |(_-<| || |(_-</ -_)",
+      "        \\_/  |_||_|_|_|\\_,_|\\___||_|/__/ \\_, |/__/\\___|",
+      "                                         |__/          ",
+
+    
+    }
+    dashboard.section.header.opts = {
+      hl = '',
+      position = 'center',
+    }
+
+    dashboard.section.buttons.val = {
+      dashboard.button('e', '  Filetree',     ':E<CR>'),
+      dashboard.button('r', '  Recent',  ':Telescope oldfiles<CR>'),
+      dashboard.button('c', '  Config',   ':e ~/.config/nvim/init.lua<CR>'), 
+      dashboard.button('q', '  Quit',          ':qa<CR>'),
+    }
+
+    alpha.setup(dashboard.config)
+  end,
+},
 
 -- Markdown renderer
 {
@@ -169,8 +228,9 @@ vim.opt.number = true          -- absolute line numbers
 -- Enable true colors in terminal
 vim.opt.termguicolors = true
 
-vim.opt.wrap = true
-vim.opt.linebreak = true
+-- Override shift behavior so it can't do to different lines
+
+
 
 -- Set Birds of Paradise as the colorscheme
 vim.cmd("colorscheme birds-of-paradise")
@@ -183,10 +243,6 @@ vim.keymap.set('i', '<C-v>', '<C-r>+', { noremap = true, silent = true })
 -- Hide hidden files/directories in netrw
 vim.g.netrw_list_hide = '\\(^\\|\\s\\s\\)\\zs\\.\\S\\+'
 vim.g.netrw_hide = 1
-
--- Change Shift + Right to end of word
-vim.keymap.set('i', '<S-Right>', '<C-o>e<Right>', { noremap = true, silent = true })
-vim.keymap.set('n', '<S-Right>', 'el', { noremap = true, silent = true })
 
 -- R to redo 
 vim.keymap.set('n', 'r', '<C-r>', {})
