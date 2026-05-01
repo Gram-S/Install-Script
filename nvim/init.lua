@@ -3,17 +3,6 @@
 -- Turn off the little things at the end of command line
 vim.opt.ruler = false
 
--- Slightly darker command line
-vim.api.nvim_create_autocmd('ColorScheme', {
-  callback = function()
-    local bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg or 0x1e1c1a
-    local r = math.max(0, bit.rshift(bit.band(bg, 0xff0000), 16) - 10)
-    local g = math.max(0, bit.rshift(bit.band(bg, 0x00ff00), 8) - 10)
-    local b = math.max(0, bit.band(bg, 0x0000ff) - 40)
-    vim.api.nvim_set_hl(0, 'MsgArea', { bg = r * 65536 + g * 256 + b })
-  end,
-})
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -104,6 +93,42 @@ require("lazy").setup({
   end,
 },
 
+-- Treesitter syntax highlighting
+{
+  'nvim-treesitter/nvim-treesitter',
+  build = ':TSUpdate',
+  config = function()
+    require('nvim-treesitter').setup {
+      highlight = { enable = true },
+      ensure_installed = { 'lua', 'python', 'bash' },
+    }
+  end,
+},
+
+-- ICONS TO NETRW
+{
+  'nvim-tree/nvim-web-devicons',
+  config = function()
+    require('nvim-web-devicons').setup {}
+  end,
+},
+{
+  'prichrd/netrw.nvim',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  config = function()
+    require('netrw').setup {}
+  end,
+},
+
+
+-- Rainbow Brackets 
+{
+  'HiPhish/rainbow-delimiters.nvim',
+  config = function()
+    require('rainbow-delimiters.setup').setup {}
+  end,
+},
+
 -- Markdown renderer
 {
   "brianhuster/live-preview.nvim",
@@ -120,39 +145,21 @@ require("lazy").setup({
   end,
 },
 
--- Cute files to netrw
+-- New status line
 {
   'echasnovski/mini.statusline',
   version = '*',
   config = function()
     local statusline = require('mini.statusline')
 
-    local function set_highlights()
-      local function lighten(hex, amount)
-        local r = math.min(255, tonumber(hex:sub(2,3), 16) + amount)
-        local g = math.min(255, tonumber(hex:sub(4,5), 16) + amount)
-        local b = math.min(255, tonumber(hex:sub(6,7), 16) + amount)
-        return string.format('#%02x%02x%02x', r, g, b)
-      end
-
-      local normal_bg = string.format('#%06x', vim.api.nvim_get_hl(0, { name = 'Normal' }).bg or 0x1e1c1a)
-      local normal_fg = string.format('#%06x', vim.api.nvim_get_hl(0, { name = 'Normal' }).fg or 0xc5b9a8)
-      local mid_bg    = lighten(normal_bg, 25)
-
-      vim.api.nvim_set_hl(0, 'BarMode',    { fg = normal_fg, bg = lighten(normal_bg, 40) })
-      vim.api.nvim_set_hl(0, 'BarDir',     { fg = normal_fg, bg = mid_bg })
-      vim.api.nvim_set_hl(0, 'BarFile',    { fg = normal_fg, bg = lighten(normal_bg, 10) })
-      vim.api.nvim_set_hl(0, 'BarType',    { fg = normal_fg, bg = mid_bg })
-      vim.api.nvim_set_hl(0, 'BarSaved',   { fg = '#a6e3a1', bg = mid_bg })
-      vim.api.nvim_set_hl(0, 'BarUnsaved', { fg = '#fab387', bg = mid_bg })
-      vim.api.nvim_set_hl(0, 'BarExtra',   { fg = normal_fg, bg = lighten(normal_bg, 40) })
-    end
-
-    set_highlights()
-    vim.api.nvim_create_autocmd('ColorScheme', {
-      callback = set_highlights,
-    })
-
+    vim.api.nvim_set_hl(0, 'BarMode',    { ctermfg = 2, ctermbg = 0  })
+    vim.api.nvim_set_hl(0, 'BarDir',     { ctermfg = 7, ctermbg = 0  })
+    vim.api.nvim_set_hl(0, 'BarFile',    { ctermfg = 7, ctermbg = 0  })
+    vim.api.nvim_set_hl(0, 'BarType',    { ctermfg = 7, ctermbg = 0  })
+    vim.api.nvim_set_hl(0, 'BarSaved',   { ctermfg = 2, ctermbg = 0  })
+    vim.api.nvim_set_hl(0, 'BarUnsaved', { ctermfg = 1, ctermbg = 0  })
+    vim.api.nvim_set_hl(0, 'BarExtra',   { ctermfg = 7, ctermbg = 0  })
+    vim.api.nvim_set_hl(0, 'LineNr', { ctermfg = 8 })
     statusline.setup({
       content = {
         active = function()
@@ -166,14 +173,20 @@ require("lazy").setup({
             r      = 'REPLACE',
             c      = 'COMMAND',
           }
-          local mode       = mode_map[vim.fn.mode()] or vim.fn.mode()
-          local filename   = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t')
-          local dir        = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-          local filetype   = vim.bo.filetype ~= '' and vim.bo.filetype or 'plain'
-          local modified   = vim.bo.modified and '● unsaved' or '✔ saved'
-          local mod_hl     = vim.bo.modified and 'BarUnsaved' or 'BarSaved'
-          local ftime      = vim.fn.getftime(vim.api.nvim_buf_get_name(0))
-          local file_age   = ftime > 0 and os.date('%b %d %I:%M %p', ftime) or 'new file'
+          local mode     = mode_map[vim.fn.mode()] or vim.fn.mode()
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t')
+          local bufpath  = vim.api.nvim_buf_get_name(0)
+          local dir
+          if bufpath ~= '' then
+            dir = vim.fn.fnamemodify(bufpath, ':h:t') .. ' /'
+          else
+            dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' /'
+          end
+          local filetype = vim.bo.filetype ~= '' and vim.bo.filetype or 'plain'
+          local modified = vim.bo.modified and '● unsaved' or '✔ saved'
+          local mod_hl   = vim.bo.modified and 'BarUnsaved' or 'BarSaved'
+          local ftime    = vim.fn.getftime(bufpath)
+          local file_age = ftime > 0 and os.date('%b %d %I:%M %p', ftime) or '-'
 
           return statusline.combine_groups({
             { hl = 'BarMode',  strings = { mode } },
@@ -182,7 +195,7 @@ require("lazy").setup({
             '%=',
             { hl = 'BarType',  strings = { filetype } },
             { hl = mod_hl,     strings = { modified } },
-            { hl = 'BarExtra', strings = { file_age } },
+            { hl = 'BarExtra', strings = { 'Opened:', file_age } },
           })
         end,
         inactive = function()
@@ -198,22 +211,9 @@ require("lazy").setup({
     vim.opt.winbar = '%!v:lua.MiniStatusline.active()'
   end,
 },
-
 -- Multiple cursors
-{
-  "brenton-leighton/multiple-cursors.nvim",
-  version = "*",  -- Use the latest tagged version
-  opts = {},  -- This causes the plugin setup function to be called
-  keys = {
-    {"<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = {"n", "x"}, desc = "Add cursor and move down"},
-    {"<C-k>", "<Cmd>MultipleCursorsAddUp<CR>", mode = {"n", "x"}, desc = "Add cursor and move up"},
 
-    {"<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = {"n", "i", "x"}, desc = "Add cursor and move up"},
-    {"<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = {"n", "i", "x"}, desc = "Add cursor and move down"},
-  },
 },
-
-    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -226,14 +226,36 @@ require("lazy").setup({
 vim.opt.number = true          -- absolute line numbers
 
 -- Enable true colors in terminal
-vim.opt.termguicolors = true
+vim.opt.termguicolors = false
+vim.api.nvim_set_hl(0, 'Comment', { ctermfg = 8, italic = true })
 
 -- Override shift behavior so it can't do to different lines
+vim.keymap.set('i', '<S-Right>', function()
+  local line = vim.fn.getline('.')
+  local col = vim.fn.col('.')
+  local line_len = #line
+  if col > line_len then return end
+  local rest = line:sub(col + 1)
+  local space = rest:find('%s')
+  if space then
+    vim.fn.cursor(vim.fn.line('.'), col + space)
+  else
+    vim.fn.cursor(vim.fn.line('.'), line_len + 1)
+  end
+end, { noremap = true, silent = true })
 
-
-
--- Set Birds of Paradise as the colorscheme
-vim.cmd("colorscheme birds-of-paradise")
+vim.keymap.set('i', '<S-Left>', function()
+  local line = vim.fn.getline('.')
+  local col = vim.fn.col('.')
+  if col == 1 then return end
+  local before = line:sub(1, col - 2)
+  local space = before:reverse():find('%s')
+  if space then
+    vim.fn.cursor(vim.fn.line('.'), col - space)
+  else
+    vim.fn.cursor(vim.fn.line('.'), 1)
+  end
+end, { noremap = true, silent = true })
 
 -- System clipboard with Ctrl+C and Ctrl+V
 vim.keymap.set({'n', 'v'}, '<C-c>', '"+y', { noremap = true, silent = true })
@@ -258,6 +280,10 @@ vim.keymap.set('i', '<S-Down>', '<C-o>9j<Down>', {})
 
 -- Netwr directory exit at file
 vim.g.netrw_keepdir = 0
+
+-- Multine cursor editing
+vim.keymap.set('n', '<C-Up>', '<C-v>k', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-Down>', '<C-v>j', { noremap = true, silent = true })
 
 -- Let d clear a line
 vim.keymap.set('n', 'd', function()

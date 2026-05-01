@@ -1,3 +1,5 @@
-Rstudio Krita Jellyfin Draw.io JupyterLab Waydroid KeePassXC Inkscape Neovim Jupyter
+Rstudio Jellyfin Draw.io Waydroid KeePassXC Neovim
 
+Btop/fastfetch
 How to minecraft - Pandora
+Affinity Appimage + Desktop (Can it replace draw.io?)

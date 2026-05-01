@@ -10,7 +10,11 @@ To get waydroid working (somehow):
 	Run sudo venv/bin/python3 main.py uninstall nodataperm
 	This removes it and then it works now
 	If crashes persist try Libdnk instead of Libhoudini (or both?)
-	
+
+Fix the scrolling
+waydroid prop set persist.waydroid.fake_touch "*"
+
+
 	
 	
 Helium comes from a copr repo, you can use "helium" command to break it if it locks
