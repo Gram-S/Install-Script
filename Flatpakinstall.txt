@@ -1,4 +1,4 @@
-REQ: Rstudio Jellyfin Gimp Waydroid KeePassXC Neovim Planify
+REQ: Rstudio Jellyfin Gimp Waydroid KeePassXC Neovim Planify Helium/Waterfox
 
 OP: Sklauncher Veloren Midustry Lunalia Davinchi VirtualEnv
 https://skmedix.pl/ 
