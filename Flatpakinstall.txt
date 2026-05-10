@@ -1,4 +1,12 @@
-Rstudio Jellyfin Draw.io Waydroid KeePassXC Neovim
+REQ: Rstudio Jellyfin Gimp Waydroid KeePassXC Neovim Planify
+
+OP: Sklauncher Veloren Midustry Lunalia Davinchi VirtualEnv
+https://skmedix.pl/ 
+https://www.reddit.com/r/DigitalEscapeTools/comments/1szamkk/veloren_opensource_multiplayer_rpg_selfhosted/ 
+https://www.luanti.org/en/
+https://www.luanti.org/en/education/ Lots of resources!
+https://kaossverige.se/post/814572829367517184/davinci-resolve-studio-21-photo-editor-breaking?
+https://docs.astral.sh/uv/pip/environments/
 
 Btop/fastfetch
 How to minecraft - Pandora
