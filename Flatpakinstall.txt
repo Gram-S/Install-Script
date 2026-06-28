@@ -1,6 +1,6 @@
-REQ: Rstudio Jellyfin Gimp Waydroid KeePassXC Neovim Planify Helium/Waterfox
+REQ: Rstudio Krita Jellyfin Waydroid KeePassXC Neovim AppFlowy Helium
 
-OP: Sklauncher Veloren Midustry Lunalia Davinchi VirtualEnv Asciiquarium
+OP: PolyMC Veloren Midustry Lunalia Davinchi VirtualEnv Asciiquarium
 https://skmedix.pl/ 
 https://www.reddit.com/r/DigitalEscapeTools/comments/1szamkk/veloren_opensource_multiplayer_rpg_selfhosted/ 
 https://www.luanti.org/en/
