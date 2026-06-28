@@ -1,4 +1,4 @@
-REQ: Rstudio Krita Jellyfin Waydroid KeePassXC Neovim AppFlowy Helium
+REQ: Rstudio Krita Jellyfin Waydroid KeePassXC Neovim zim-wiki Helium
 
 OP: PolyMC Veloren Midustry Lunalia Davinchi VirtualEnv Asciiquarium
 https://skmedix.pl/ 
