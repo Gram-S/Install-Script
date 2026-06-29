@@ -1,6 +1,3 @@
-
-Reproduce plot with curves for G1 and G2 model - use python interpolation
-
 To get waydroid working (somehow):
 	Follow https://github.com/casualsnek/waydroid_script
 	Install Libhoudini
@@ -14,9 +11,6 @@ To get waydroid working (somehow):
 Fix the scrolling
 waydroid prop set persist.waydroid.fake_touch "*"
 
-
-	
-	
 Helium comes from a copr repo, you can use "helium" command to break it if it locks
 
 For when git asks me a question
