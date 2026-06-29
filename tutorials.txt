@@ -9,11 +9,15 @@ To get waydroid working (somehow):
 	If crashes persist try Libdnk instead of Libhoudini (or both?)
 
 Fix the scrolling
-waydroid prop set persist.waydroid.fake_touch "*"
+$ waydroid prop set persist.waydroid.fake_touch "*"
 
-Helium comes from a copr repo, you can use "helium" command to break it if it locks
+Helium comes from a copr repo and it has problems with 'locking' where it won't open (usually when the computer shuts down without closing the app properly). Running the "helium" command in a terminal can fix this, or:
+
+$ rm ~/.config/helium/SingletonLock
 
 For when git asks me a question
-git config --global credential.helper store 
+$ git config --global credential.helper store 
 
-
+As will setting global user and emails
+$ git config user.name "Your GitHub Name"
+$ git config user.email "your-email@example.com"
