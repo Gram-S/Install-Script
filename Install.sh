@@ -25,7 +25,7 @@ python3 -m venv venv
 venv/bin/pip install -r requirements.txt
 sudo venv/bin/python3 main.py # Android 13 > Libhoudini & Libdnk?
 
-# IF WAYDROID CRASH OCCURS, CHECK OUT CASUALSNEK. FINESS WITH LIBDNK and LIBHOUDINI 
+# IF WAYDROID CRASH OCCURS, CHECK OUT CASUALSNEK. REQUIRES FIDDLING WITH LIBDNK / LIBHOUDINI THROUGH ANDROID 11 OR 13. I REALLY HAVE NO IDEA, JUST TRY STUFF RELATING TO IT. 
 # sudo venv/bin/python3 main.py hack nodataperm
 # sleep 5m
 # sudo venv/bin/python3 main.py remove nodataperm
