@@ -1,4 +1,5 @@
 # Requires admins perms to run
+sudo -i
 dnf copr enable v8v88v8v88/helium && dnf install helium # Install Browser
 dnf install R && dnf copr enable iucar/rstudio && dnf install rstudio-desktop # R and Rstudio
 # dnf install gnome-shell-extension-caffeine # Install Caffeine
@@ -8,12 +9,22 @@ dnf install nvim
 # Waydroid 
 waydroid init -s GAPPS # Need system OTA and Vendor OTA urls
 waydroid shell -- sh -c "sqlite3 /data/data/*/*/gservices.db 'select value from main where name = \"android_id\";'" # Put in https://www.google.com/android/uncertified
+exit # Leave root shell
 
 # My neovim config
 git clone https://github.com/Gram-S/dreamer-nvim
-mkdir .config/nvim 
+mkdir ~/.config/nvim 
 mv dreamer-nvim/* $_
+rm -rf dreamer-nvim
 
-sleep 5m # Wait for 5 minutes for waydroid to sync with google 
+# Wait for 5 minutes for waydroid to sync with google 
+sleep 5m 
 waydroid session stop
-echo "Waydroid is now ready for configuraton"
+
+git clone https://github.com/casualsnek/waydroid_script
+cd waydroid_script
+python3 -m venv venv
+venv/bin/pip install -r requirements.txt
+sudo venv/bin/python3 main.py # Select libhoudini
+
+# sudo venv/bin/python3 main.py hack nodataperm # sudo python main.py remove nodataperm 
