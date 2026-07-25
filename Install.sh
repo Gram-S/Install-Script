@@ -25,6 +25,12 @@ python3 -m venv venv
 venv/bin/pip install -r requirements.txt
 sudo venv/bin/python3 main.py # Android 13 > Libhoudini & Libdnk?
 
+# Waydroid configs - REQUIRES WAYDROID TO BE RUNNING
+waydroid prop set persist.waydroid.fake_touch "*"
+waydroid prop set persist.waydroid.width 1600
+waydroid prop set persist.waydroid.height 900
+waydroid session stop # Must restart the session to apply changes
+
 # IF WAYDROID CRASH OCCURS, CHECK OUT CASUALSNEK. REQUIRES FIDDLING WITH LIBDNK / LIBHOUDINI THROUGH ANDROID 11 OR 13. I REALLY HAVE NO IDEA, JUST TRY STUFF RELATING TO IT. 
 # sudo venv/bin/python3 main.py hack nodataperm
 # sleep 5m
