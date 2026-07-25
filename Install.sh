@@ -27,9 +27,4 @@ python3 -m venv venv
 venv/bin/pip install -r requirements.txt
 sudo venv/bin/python3 main.py # Select libhoudini
 
-# IF CRASH OCCURS
-# sudo venv/bin/python3 main.py hack nodataperm 
-# waydroid session start
-# sleep 5m
-# waydroid session stop
-# sudo python main.py remove nodataperm 
+# IF WAYDROID CRASH OCCURS USE CRASH SCRIPT 
