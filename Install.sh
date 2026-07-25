@@ -41,3 +41,5 @@ read -p "Enter Github Name: " git_name
 read -p "Enter Github Name: " git_email
 git config user.name $git_name
 git config user.email $git_email
+
+# rm -rf waydroid_script # For cleanup
