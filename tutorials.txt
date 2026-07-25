@@ -1,3 +1,7 @@
+Waydroid Config
+	Default Digitial Assistant App -> None
+	
+
 To get waydroid working (somehow):
 	Follow https://github.com/casualsnek/waydroid_script
 	Install Libhoudini
