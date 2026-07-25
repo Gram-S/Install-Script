@@ -1,5 +1,9 @@
 Waydroid Config
 	Default Digitial Assistant App -> None
+	Turn off Contacts & Messager 
+	# rm .local/share/applications/waydroid.com.google.android.apps.messaging.desktop # Doesn't work for some reason
+	rm .local/share/applications/waydroid.com.google.android.contacts.desktop
+
 	
 
 To get waydroid working (somehow):
