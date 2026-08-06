@@ -2,8 +2,8 @@
 sudo dnf copr enable v8v88v8v88/helium && dnf install helium # Install Browser
 sudo dnf install R && dnf copr enable iucar/rstudio && dnf install rstudio-desktop # R and Rstudio
 # dnf install gnome-shell-extension-caffeine # Install Caffeine
-sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.jellyfin.JellyfinDesktop org.kde.krita org.polymc.PolyMC com.github.Anuken.Mindustry # Various applications I like
-sudo dnf install nvim 
+sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.jellyfin.JellyfinDesktop org.polymc.PolyMC com.github.Anuken.Mindustry # Various applications I like
+sudo dnf install nvim krita # Just can't stand the flatpak krita ver
 
 # Waydroid 
 sudo waydroid init -s GAPPS # Need system OTA and Vendor OTA urls
