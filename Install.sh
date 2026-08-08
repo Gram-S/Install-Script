@@ -18,6 +18,7 @@ read -p "Install R/Rstudio? [y/N] " response
 case "$response" in
   [yY])
     sudo dnf install R && dnf copr enable iucar/rstudio && dnf install rstudio-desktop # R and Rstudio
+    # Add R packages to install 
     ;;
   *)
     echo "R install skipped"
