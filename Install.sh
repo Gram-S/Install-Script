@@ -1,8 +1,31 @@
 # Requires admins perms to run
 sudo -v
 
+# Git setup
+git config --global credential.helper store
+read -p "Enter Github Name: " git_name
+read -p "Enter Github Name: " git_email
+git config user.name $git_name
+git config user.email $git_email
+
+# Essentials
+# dnf install gnome-shell-extension-caffeine # Install Caffeine
+sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.polymc.PolyMC com.github.Anuken.Mindustry  # Various applications I like
+sudo dnf install nvim krita # Just can't stand the flatpak krita ver
+
+# R install prompt
+read -p "Install R/Rstudio? [y/N] " response
+case "$response" in
+  [yY])
+    sudo dnf install R && dnf copr enable iucar/rstudio && dnf install rstudio-desktop # R and Rstudio
+    ;;
+  *)
+    echo "R install skipped"
+    ;;
+esac
+
 # Give opitions for browsers
-printf "Install \n1. Helium \n2. Librewolf \n3. Both \n"
+printf "Browsers: \n1. Helium \n2. Librewolf \n3. Both \n Which browser(s) to install? [1/2/3/N] "
 read choice
 
 case "$choice" in
@@ -21,11 +44,6 @@ case "$choice" in
     exit 1
     ;;
 esac
-
-sudo dnf install R && dnf copr enable iucar/rstudio && dnf install rstudio-desktop # R and Rstudio
-# dnf install gnome-shell-extension-caffeine # Install Caffeine
-sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.polymc.PolyMC com.github.Anuken.Mindustry  # Various applications I like
-sudo dnf install nvim krita # Just can't stand the flatpak krita ver
 
 # Waydroid - MIGHT REMOVE DUE TO PC CLIENT
 sudo waydroid init -s GAPPS # Need system OTA and Vendor OTA urls
