@@ -1,11 +1,33 @@
 # Requires admins perms to run
-sudo dnf copr enable v8v88v8v88/helium && dnf install helium # Install Browser
+sudo -v
+
+# Give opitions for browsers
+printf "Install \n1. Helium \n2. Librewolf \n3. Both \n"
+read choice
+
+case "$choice" in
+  1)
+    sudo dnf copr enable v8v88v8v88/helium && dnf install helium # Install Browser
+    ;;
+  2)
+    sudo flatpak install flathub io.gitlab.librewolf-community
+    ;;
+  3)
+    sudo dnf copr enable v8v88v8v88/helium && dnf install helium
+    sudo flatpak install flathub io.gitlab.librewolf-community
+    ;;
+  *)
+    echo "Cancelled"
+    exit 1
+    ;;
+esac
+
 sudo dnf install R && dnf copr enable iucar/rstudio && dnf install rstudio-desktop # R and Rstudio
 # dnf install gnome-shell-extension-caffeine # Install Caffeine
-sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.jellyfin.JellyfinDesktop org.polymc.PolyMC com.github.Anuken.Mindustry # Various applications I like
+sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.polymc.PolyMC com.github.Anuken.Mindustry  # Various applications I like
 sudo dnf install nvim krita # Just can't stand the flatpak krita ver
 
-# Waydroid 
+# Waydroid - MIGHT REMOVE DUE TO PC CLIENT
 sudo waydroid init -s GAPPS # Need system OTA and Vendor OTA urls
 sudo waydroid shell -- sh -c "sqlite3 /data/data/*/*/gservices.db 'select value from main where name = \"android_id\";'" # Put in https://www.google.com/android/uncertified
 
@@ -15,7 +37,7 @@ mkdir ~/.config/nvim
 mv dreamer-nvim/* $_
 rm -rf dreamer-nvim
 
-# Wait for 5 minutes for waydroid to sync with google 
+# Wait for 5 minutes for waydroid to sync with google  - MIGHT REMOVE DUE TO PC CLIENT
 sleep 5m 
 waydroid session stop
 
@@ -25,7 +47,7 @@ python3 -m venv venv
 venv/bin/pip install -r requirements.txt
 sudo venv/bin/python3 main.py # Android 13 > Libhoudini & Libdnk?
 
-# Waydroid configs - REQUIRES WAYDROID TO BE RUNNING
+# Waydroid configs - REQUIRES WAYDROID TO BE RUNNING  - MIGHT REMOVE DUE TO PC CLIENT
 waydroid prop set persist.waydroid.fake_touch "*"
 waydroid prop set persist.waydroid.width 1600
 waydroid prop set persist.waydroid.height 900
