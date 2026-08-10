@@ -10,7 +10,7 @@ git config user.email $git_email
 
 # Essentials
 # dnf install gnome-shell-extension-caffeine # Install Caffeine
-sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.polymc.PolyMC com.github.Anuken.Mindustry  # Various applications I like
+sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher com.github.Anuken.Mindustry  # Various applications I like
 sudo dnf install nvim krita # Just can't stand the flatpak krita ver
 
 # R install prompt
@@ -76,11 +76,4 @@ waydroid session stop # Must restart the session to apply changes
 # sudo venv/bin/python3 main.py hack nodataperm
 # sleep 5m
 # sudo venv/bin/python3 main.py remove nodataperm
-
-git config --global credential.helper store
-read -p "Enter Github Name: " git_name
-read -p "Enter Github Name: " git_email
-git config user.name $git_name
-git config user.email $git_email
-
 # rm -rf waydroid_script # For cleanup
