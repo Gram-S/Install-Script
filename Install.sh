@@ -10,14 +10,17 @@ git config user.email $git_email
 
 # Essentials
 # dnf install gnome-shell-extension-caffeine # Install Caffeine
-sudo flatpak install flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher com.github.Anuken.Mindustry  # Various applications I like
-sudo dnf install nvim krita # Just can't stand the flatpak krita ver
+sudo flatpak install krita flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher com.github.Anuken.Mindustry
+sudo dnf install nvim 
+# Caffiene
+gnome-browser-connector gnome-extensions://caffeine%40patapon.info/?action=install
 
-# R install prompt
+
+# R & R studio install prompt
 read -p "Install R/Rstudio? [y/N] " response
 case "$response" in
   [yY])
-    sudo dnf install R && dnf copr enable iucar/rstudio && dnf install rstudio-desktop # R and Rstudio
+    sudo dnf install R && dnf copr enable iucar/rstudio && dnf install rstudio-desktop 
     # Add R packages to install 
     ;;
   *)
