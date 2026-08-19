@@ -9,11 +9,11 @@ git config user.name $git_name
 git config user.email $git_email
 
 # Essentials
-# dnf install gnome-shell-extension-caffeine # Install Caffeine
 sudo flatpak install krita flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher com.github.Anuken.Mindustry
 sudo dnf install nvim 
 # Caffiene
 gnome-browser-connector gnome-extensions://caffeine%40patapon.info/?action=install
+# Add dashboard here 
 
 
 # R & R studio install prompt
@@ -49,34 +49,10 @@ case "$choice" in
     ;;
 esac
 
-# Waydroid - MIGHT REMOVE DUE TO PC CLIENT
-sudo waydroid init -s GAPPS # Need system OTA and Vendor OTA urls
-sudo waydroid shell -- sh -c "sqlite3 /data/data/*/*/gservices.db 'select value from main where name = \"android_id\";'" # Put in https://www.google.com/android/uncertified
-
 # My neovim config
 git clone https://github.com/Gram-S/dreamer-nvim
 mkdir ~/.config/nvim 
 mv dreamer-nvim/* $_
 rm -rf dreamer-nvim
-
-# Wait for 5 minutes for waydroid to sync with google  - MIGHT REMOVE DUE TO PC CLIENT
-sleep 5m 
-waydroid session stop
-
-git clone https://github.com/casualsnek/waydroid_script
-cd waydroid_script
-python3 -m venv venv
-venv/bin/pip install -r requirements.txt
-sudo venv/bin/python3 main.py # Android 13 > Libhoudini & Libdnk?
-
-# Waydroid configs - REQUIRES WAYDROID TO BE RUNNING  - MIGHT REMOVE DUE TO PC CLIENT
-waydroid prop set persist.waydroid.fake_touch "*"
-waydroid prop set persist.waydroid.width 1600
-waydroid prop set persist.waydroid.height 900
-waydroid session stop # Must restart the session to apply changes
-
-# IF WAYDROID CRASH OCCURS, CHECK OUT CASUALSNEK. REQUIRES FIDDLING WITH LIBDNK / LIBHOUDINI THROUGH ANDROID 11 OR 13. I REALLY HAVE NO IDEA, JUST TRY STUFF RELATING TO IT. 
-# sudo venv/bin/python3 main.py hack nodataperm
-# sleep 5m
 # sudo venv/bin/python3 main.py remove nodataperm
 # rm -rf waydroid_script # For cleanup
