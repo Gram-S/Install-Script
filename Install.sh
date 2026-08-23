@@ -1,6 +1,9 @@
 # Requires admins perms to run
 sudo -v
 
+# Some terminal configs
+echo "export PS1=$'\033[0;32m\W\033[0m \$ '" >> ~/.bashrc
+
 # Git setup
 git config --global credential.helper store
 read -p "Enter Github Name: " git_name
