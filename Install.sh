@@ -2,7 +2,7 @@
 sudo -v
 
 # Some terminal configs
-echo "PS1='\[\033[0;32m\]$PWD\[\033[0m\]\$ '" >> ~/.bashrc
+echo "export PS1='\[\e[32m\]\w\[\e[0m\]\$ ' " >> ~/.bashrc
 
 # Git setup
 git config --global credential.helper store
