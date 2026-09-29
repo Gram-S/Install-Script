@@ -12,7 +12,7 @@ git config user.name $git_name
 git config user.email $git_email
 
 # Essentials
-sudo flatpak install krita flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher com.github.Anuken.Mindustry
+sudo flatpak install krita gimp inkscape flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher com.github.Anuken.Mindustry
 sudo dnf install nvim 
 wget https://launcher-pkg-ark-en.yo-star.com/install_pkg/game_launcher/Arknights_EN/Arknights_EN_Gamelauncher-1.8.1-setup.exe
 # Caffiene
