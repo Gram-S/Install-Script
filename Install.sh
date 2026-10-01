@@ -15,6 +15,11 @@ git config user.email $git_email
 flatpak install flathub io.neovim.nvim org.kde.krita org.inkscape.Inkscape io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher 
 wget https://launcher-pkg-ark-en.yo-star.com/install_pkg/game_launcher/Arknights_EN/Arknights_EN_Gamelauncher-1.8.1-setup.exe
 
+# Helium install
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install org.freedesktop.Sdk/x86_64/24.08
+flatpak-builder --arch=x86_64 --user --install --force-clean build-dir net.imput.helium.yml
+
 # Caffiene
 gnome-browser-connector gnome-extensions://caffeine%40patapon.info/?action=install
 # Add dashboard here 
@@ -29,26 +34,5 @@ case "$response" in
     ;;
   *)
     echo "R install skipped"
-    ;;
-esac
-
-# Give opitions for browsers
-printf "Browsers: \n1. Helium \n2. Librewolf \n3. Both \n Which browser(s) to install? [1/2/3/N] "
-read choice
-
-case "$choice" in
-  1)
-    sudo dnf copr enable v8v88v8v88/helium && dnf install helium # Install Browser
-    ;;
-  2)
-    sudo flatpak install flathub io.gitlab.librewolf-community
-    ;;
-  3)
-    sudo dnf copr enable v8v88v8v88/helium && dnf install helium
-    sudo flatpak install flathub io.gitlab.librewolf-community
-    ;;
-  *)
-    echo "Cancelled"
-    exit 1
     ;;
 esac
