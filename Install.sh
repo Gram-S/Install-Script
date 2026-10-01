@@ -1,5 +1,5 @@
 # Requires admins perms to run
-sudo -v
+# sudo -v
 
 # Some terminal configs
 echo "export PS1='\[\e[32m\]\w\[\e[0m\]\$ ' " >> ~/.bashrc
@@ -12,9 +12,9 @@ git config user.name $git_name
 git config user.email $git_email
 
 # Essentials
-sudo flatpak install krita gimp inkscape flathub io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher com.github.Anuken.Mindustry
-sudo dnf install nvim 
+flatpak install flathub io.neovim.nvim org.kde.krita org.inkscape.Inkscape io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher 
 wget https://launcher-pkg-ark-en.yo-star.com/install_pkg/game_launcher/Arknights_EN/Arknights_EN_Gamelauncher-1.8.1-setup.exe
+
 # Caffiene
 gnome-browser-connector gnome-extensions://caffeine%40patapon.info/?action=install
 # Add dashboard here 
@@ -52,11 +52,3 @@ case "$choice" in
     exit 1
     ;;
 esac
-
-# My neovim config
-git clone https://github.com/Gram-S/dreamer-nvim
-mkdir ~/.config/nvim 
-mv dreamer-nvim/* $_
-rm -rf dreamer-nvim
-# sudo venv/bin/python3 main.py remove nodataperm
-# rm -rf waydroid_script # For cleanup
