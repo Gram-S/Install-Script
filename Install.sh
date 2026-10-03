@@ -12,7 +12,36 @@ git config user.name $git_name
 git config user.email $git_email
 
 # Essentials
-flatpak install flathub io.neovim.nvim org.kde.krita org.inkscape.Inkscape io.github.alainm23.planify org.keepassxc.KeePassXC org.prismlauncher.PrismLauncher 
+apps=(
+  io.neovim.nvim # VScode style?
+  io.github.alainm23.planify
+  org.keepassxc.KeePassXC
+  org.prismlauncher.PrismLauncher
+  org.godotengine.Godot
+  # com.vscodium.codium # Not sure if needed
+
+  # - Photoshop Applications -
+  org.gimp.GIMP # Generic Photoshop
+  org.kde.krita # Drawing 
+  org.inkscape.Inkscape # Vector based
+  # art.darkly.Darkly # Requires testing 
+  # Moko when it comes out
+
+  # - Music - 
+  # fm.reaper.Reaper # propietary
+  # org.ardour.Ardour
+  # io.lmms.LMMS
+  # com.bitwig.BitwigStudio
+
+  # - Video -
+  org.kde.kdenlive
+  com.obsproject.Studio
+
+  # - 3D - 
+  # org.blender.Blender
+)
+
+flatpak install flathub "${apps[@]}"
 wget https://launcher-pkg-ark-en.yo-star.com/install_pkg/game_launcher/Arknights_EN/Arknights_EN_Gamelauncher-1.8.1-setup.exe
 
 # Helium install
@@ -20,7 +49,7 @@ flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/fl
 flatpak install org.freedesktop.Sdk/x86_64/24.08
 flatpak-builder --arch=x86_64 --user --install --force-clean build-dir net.imput.helium.yml
 
-# Caffiene
+# Gnome Extensions
 gnome-browser-connector gnome-extensions://caffeine%40patapon.info/?action=install
 # Add dashboard here 
 
