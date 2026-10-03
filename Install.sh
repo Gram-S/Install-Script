@@ -18,6 +18,7 @@ apps=(
   org.keepassxc.KeePassXC
   org.prismlauncher.PrismLauncher
   org.godotengine.Godot
+  com.protonvpn.www
   # com.vscodium.codium # Not sure if needed
 
   # - Photoshop Applications -
