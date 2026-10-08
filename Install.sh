@@ -11,6 +11,13 @@ read -p "Enter Github Name: " git_email
 git config user.name $git_name
 git config user.email $git_email
 
+packages=(
+  # ghgrab #PLEASE I LOVE YOU
+  # yazi 
+  # neovim # Single file editing
+  # leaf # markdown rendering
+)
+
 # Essentials
 apps=(
   io.neovim.nvim # VScode style?
