@@ -16,6 +16,7 @@ packages=(
   # yazi 
   # neovim # Single file editing
   # leaf # markdown rendering
+  # curl -fL -o /tmp/photocraft.flatpak https://github.com/storytold/photocraft/releases/download/v0.5.0/photocraft-0.5.0-linux-x86_64.flatpak && flatpak install --user -y /tmp/photocraft.flatpak
 )
 
 # Essentials
