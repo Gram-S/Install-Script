@@ -7,6 +7,7 @@ sudo pacman -S keepassxc
 sudo pacman -S prismlauncher
 sudo pacman -S godot
 sudo pacman -S blender
+sudo pacman -S krita
 yay -S proton-vpn-gtk-app
 yay -S vscodium-bin
 
