@@ -6,6 +6,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # General Applications 
 sudo apt install neovim
 sudo apt install keepassxc
+sudo apt install krita
 flatpak install flathub org.prismlauncher.PrismLauncher
 flatpak install flathub org.godotengine.Godot
 flatpak install flathub com.vscodium.codium
