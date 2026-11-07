@@ -8,3 +8,4 @@ flatpak install flathub org.blender.Blender
 flatpak install flathub com.valvesoftware.Steam
 flatpak install flathub com.vscodium.codium
 flatpak install flathub com.protonvpn.www
+flatpak install krita
