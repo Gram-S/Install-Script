@@ -3,18 +3,15 @@ sudo dnf install rustup gcc
 rustup-init -y
 # make sure ~/.cargo/bin is on your PATH
 
-# ---------- Neovim ----------
 sudo dnf install neovim
-
-# ---------- KeePassXC ----------
+sudo dnf install krita
 sudo dnf install keepassxc
+sudo dnf install godot
+sudo dnf install blender
 
 flatpak install flathub org.prismlauncher.PrismLauncher
 flatpak install flathub com.vscodium.codium
 flatpak install flathub com.protonvpn.www
-
-sudo dnf install godot
-sudo dnf install blender
 
 # Steam (needs RPM Fusion)
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
