@@ -20,6 +20,7 @@ sudo dnf install steam
 # Cli tools
 sudo dnf install distrobox podman
 sudo dnf install fastfetch
+sudo dnf install navi # commands
 cargo install --locked yazi-fm yazi-cli
 sudo dnf install fd-find ripgrep fzf poppler-utils
 # ffmpeg needs RPM Fusion: sudo dnf install ffmpeg
