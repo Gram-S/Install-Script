@@ -10,7 +10,6 @@ sudo dnf install godot
 sudo dnf install blender
 
 flatpak install flathub org.prismlauncher.PrismLauncher
-flatpak install flathub com.vscodium.codium
 flatpak install flathub com.protonvpn.www
 
 # Steam (needs RPM Fusion)
@@ -19,6 +18,7 @@ sudo dnf install steam
 
 # Cli tools
 sudo dnf install distrobox podman
+sudo dnf install jupyter-lab
 sudo dnf install fastfetch
 sudo dnf install navi # commands
 cargo install --locked yazi-fm yazi-cli
