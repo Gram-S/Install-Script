@@ -18,7 +18,7 @@ sudo dnf install steam
 
 # Cli tools
 sudo dnf install distrobox podman
-sudo dnf install jupyter-lab
+sudo dnf install jupyter-lab # And pandoc/nbconvert?
 sudo dnf install fastfetch
 sudo dnf install navi # commands
 cargo install --locked yazi-fm yazi-cli
